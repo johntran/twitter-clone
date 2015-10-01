@@ -2,7 +2,7 @@ Twitter Clone
 ==============
 
 
-Chatroom built in:
+Built using:
 
 * Ruby on Rails
 * React ES6
