@@ -1,7 +1,7 @@
 Twitter Clone
 ==============
 
-# To Run:
+## To Run:
 
 Run
 > rails s -p 4003
@@ -12,14 +12,15 @@ Go to "localhost:4003" in your favorite browser. I don't like using port 3000 be
 
 to make changes and have webpack remake your bundle.js
 
-# Built using:
+## Built using:
 
+### Technology
 * Ruby on Rails
 * React ES6
 * Flux
 * PostgreSQL
 
-Tools:
+### Tools
 
 * Webpack
 * Babel

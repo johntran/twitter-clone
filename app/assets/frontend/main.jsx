@@ -31,10 +31,12 @@ class Main extends React.Component {
 }
 
 let documentReady = () => {
-  React.render(
-    <Main />,
-      document.getElementById('react')
-  );
+  let reactNode = document.getElementById('react');
+  if (reactNode) {
+    React.render(
+      <Main />, reactNode
+    );
+  }
 };
 
 $(documentReady)
