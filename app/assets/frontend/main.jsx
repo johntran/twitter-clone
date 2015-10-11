@@ -1,37 +1,35 @@
-import TweetBox from "./components/TweetBox"
-import TweetList from "./components/TweetList"
+import TweetBox from "./components/TweetBox";
+import TweetList from "./components/TweetList";
+import TweetStore from "./stores/TweetStore";
 
-let mockTweets = [
-  { id: 1, name: 'John Tran', body: 'My #FirstTweet' },
-  { id: 2, name: 'John Tran', body: 'My #SecondTweet' },
-  { id: 3, name: 'John Tran', body: 'My #ThirdTweet' }
+import TweetActions from "./actions/TweetActions";
 
-];
+TweetActions.getAllTweets();
 
 class Main extends React.Component {
   constructor(props){
     super(props);
-    this.state = {tweetsList: []};
+    this.state = { tweetsList: [] };
   }
 
   formattedTweets(tweetsList){
-    let formattedList = tweetsList.map(tweet =>{
-      tweet.formattedDate = moment(tweet.created_at).fromNow();
-      return tweet;
-    });
-    return {
-      tweetsList: formattedList
-    };
+  //   let formattedList = tweetsList.map(tweet =>{
+  //     tweet.formattedDate = moment(tweet.created_at).fromNow();
+  //     return tweet;
+  //   });
+  //   return {
+  //     tweetsList: formattedList
+  //   };
   }
 
   addTweet(tweetToAdd){
-    $.post("/tweets", { body: tweetToAdd })
-    .success( savedTweet => {
-      let newTweetsList = this.state.tweetsList;
-      newTweetsList.unshift(savedTweet);
-      this.setState(this.formattedTweets(newTweetsList));
-    })
-    .error(error => console.log(error));
+    // $.post("/tweets", { body: tweetToAdd })
+    // .success( savedTweet => {
+    //   let newTweetsList = this.state.tweetsList;
+    //   newTweetsList.unshift(savedTweet);
+    //   this.setState(this.formattedTweets(newTweetsList));
+    // })
+    // .error(error => console.log(error));
   }
 
   componentDidMount (){
