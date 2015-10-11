@@ -1,5 +1,11 @@
 #Twitter Clone
 
+## Live Demo
+
+See project running here:
+
+> https://github.com/johntran/twitter-clone
+
 ## To Run
 
 In project folder in Terminal, run:
