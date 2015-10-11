@@ -14,5 +14,12 @@ export default {
       actionType: ActionTypes.RECEIVED_ONE_TWEET,
       rawTweet
     });
+  },
+  receivedUsers(rawUsers){
+    console.log('ServerAction', "received users");
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.RECEIVED_USERS,
+      rawUsers
+    });
   }
 };

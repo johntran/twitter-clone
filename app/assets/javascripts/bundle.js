@@ -24882,6 +24882,15 @@
 	    }).error(function (error) {
 	      return console.log(error);
 	    });
+	  },
+	  getAllUsers: function getAllUsers() {
+	    $.get("/followers/random").success(function (rawUsers) {
+	      return _actionsServerActions2["default"].receivedUsers(rawUsers);
+	    }, function (rawUsers) {
+	      return console.log('rawUsers', rawUsers);
+	    }).error(function (error) {
+	      return console.log(error);
+	    });
 	  }
 	};
 	module.exports = exports["default"];
@@ -24921,6 +24930,13 @@
 	    _dispatcher2["default"].dispatch({
 	      actionType: _constants2["default"].RECEIVED_ONE_TWEET,
 	      rawTweet: rawTweet
+	    });
+	  },
+	  receivedUsers: function receivedUsers(rawUsers) {
+	    console.log('ServerAction', "received users");
+	    _dispatcher2["default"].dispatch({
+	      actionType: _constants2["default"].RECEIVED_USERS,
+	      rawUsers: rawUsers
 	    });
 	  }
 	};
@@ -25279,7 +25295,8 @@
 	});
 	exports['default'] = {
 	  RECEIVED_TWEETS: 'RECEIVED_TWEETS',
-	  RECEIVED_ONE_TWEET: 'RECEIVED_ONE_TWEET'
+	  RECEIVED_ONE_TWEET: 'RECEIVED_ONE_TWEET',
+	  RECEIVED_USERS: 'RECEIVED_USERS'
 	
 	};
 	module.exports = exports['default'];
@@ -25524,12 +25541,16 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _storesUserStoreJsx = __webpack_require__(/*! ../stores/UserStore.jsx */ 247);
+	var _storesUserStore = __webpack_require__(/*! ../stores/UserStore */ 247);
 	
-	var _storesUserStoreJsx2 = _interopRequireDefault(_storesUserStoreJsx);
+	var _storesUserStore2 = _interopRequireDefault(_storesUserStore);
+	
+	var _actionsUserActions = __webpack_require__(/*! ../actions/UserActions */ 250);
+	
+	var _actionsUserActions2 = _interopRequireDefault(_actionsUserActions);
 	
 	var getAppState = function getAppState() {
-	  return { users: _storesUserStoreJsx2['default'].getAll() };
+	  return { users: _storesUserStore2['default'].getAll() };
 	};
 	
 	var Follow = (function (_React$Component) {
@@ -25540,9 +25561,27 @@
 	
 	    _get(Object.getPrototypeOf(Follow.prototype), 'constructor', this).call(this, props);
 	    this.state = getAppState();
+	    this._onChange = this._onChange.bind(this);
 	  }
 	
 	  _createClass(Follow, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      _actionsUserActions2['default'].getAllUsers();
+	      _storesUserStore2['default'].addChangeListener(this._onChange);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      _storesUserStore2['default'].removeChangeListener(this._onChange);
+	    }
+	  }, {
+	    key: '_onChange',
+	    value: function _onChange() {
+	      console.log(5, 'Main._onChange()');
+	      this.setState(getAppState());
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var users = this.state.users.map(function (user) {
@@ -28199,7 +28238,8 @@
 	
 	var _AppEventEmitter3 = _interopRequireDefault(_AppEventEmitter2);
 	
-	var _users = [{ id: 1, name: 'DHH' }, { id: 2, name: 'JW' }];
+	var _users = [];
+	//{id: 1, name: 'DHH'}, {id: 2, name: 'JW'}
 	
 	var UserEventEmitter = (function (_AppEventEmitter) {
 	  _inherits(UserEventEmitter, _AppEventEmitter);
@@ -28224,6 +28264,9 @@
 	
 	_dispatcher2["default"].register(function (action) {
 	  switch (action.actionType) {
+	    case _constants2["default"].RECEIVED_USERS:
+	      _users = action.rawUsers;
+	      UserStore.emitChange();
 	    default:
 	  }
 	});
@@ -28594,6 +28637,32 @@
 	  return arg === void 0;
 	}
 
+
+/***/ },
+/* 250 */
+/*!*****************************************************!*\
+  !*** ./app/assets/frontend/actions/UserActions.jsx ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var _API = __webpack_require__(/*! ../API */ 207);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
+	exports["default"] = {
+	  getAllUsers: function getAllUsers() {
+	    _API2["default"].getAllUsers();
+	  }
+	};
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);
