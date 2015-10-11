@@ -25549,6 +25549,8 @@
 	
 	var _actionsUserActions2 = _interopRequireDefault(_actionsUserActions);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 159);
+	
 	var getAppState = function getAppState() {
 	  return { users: _storesUserStore2['default'].getAll() };
 	};
@@ -25608,6 +25610,11 @@
 	          'ul',
 	          { className: 'collection' },
 	          users
+	        ),
+	        _react2['default'].createElement(
+	          _reactRouter.Link,
+	          { to: '/' },
+	          'Back'
 	        )
 	      );
 	    }

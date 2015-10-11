@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def as_json(options={})
-    { name: display_name, gravatar: gravatar}
+    { id: id, name: display_name, gravatar: gravatar}
   end
 
   def display_name
