@@ -1,10 +1,23 @@
 #Twitter Clone
 
+A clone of Twitter
+
+## Features
+
+* Compilation with Webpack
+* Wrote JavaScript 2015 with Babel compiler
+* React Components in ES6
+* Flux Architecture
+
 ## Live Demo
 
 See project running here:
 
 > https://murmuring-refuge-2783.herokuapp.com
+
+## Code Architecture
+
+React/Flux files are under app/assets/frontend
 
 ## To Run
 
