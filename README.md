@@ -1,9 +1,15 @@
-Twitter Clone
-==============
+#Twitter Clone
 
-## To Run:
+## To Run
 
-Run
+In project folder in Terminal, run:
+
+> bundle install
+
+> npm install
+
+> rake db:migrate
+
 > rails s -p 4003
 
 Go to "localhost:4003" in your favorite browser. I don't like using port 3000 because most rails projects use 3000.
@@ -12,11 +18,21 @@ Go to "localhost:4003" in your favorite browser. I don't like using port 3000 be
 
 to make changes and have webpack remake your bundle.js
 
-## Built using:
+## Built Using
 
 ### Technology
 * Ruby on Rails
+
+ * Devise
+
 * React ES6
+
+ * React Router
+ 
+     * History
+
+ * React DOM
+
 * Flux
 * PostgreSQL
 
@@ -24,3 +40,4 @@ to make changes and have webpack remake your bundle.js
 
 * Webpack
 * Babel
+* Events
