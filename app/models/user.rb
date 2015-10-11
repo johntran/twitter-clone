@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def gravatar
     hash = Digest::MD5.hexdigest(email)
-    "http://www.gravatar.com/avatar/#{hash}"
+    "https://www.gravatar.com/avatar/#{hash}"
   end
 
   def self.who_to_follow(current_user_id)
