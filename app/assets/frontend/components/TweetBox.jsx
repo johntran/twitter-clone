@@ -1,8 +1,9 @@
-export default class TweetBox extends React.Component{
+import TweetActions from '../actions/TweetActions'
 
+export default class TweetBox extends React.Component{
   sendTweet(event) {
     event.preventDefault();
-    this.props.sendTweet(this.refs.tweetTextArea.getDOMNode().value);
+    TweetActions.sendTweet(this.refs.tweetTextArea.getDOMNode().value);
     this.refs.tweetTextArea.getDOMNode().value = '';
   }
 

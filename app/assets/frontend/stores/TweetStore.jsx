@@ -6,8 +6,12 @@ let _tweets = [];
 const CHANGE_EVENT = "CHANGE";
 
 class TweetEventEmitter extends EventEmitter {
+
   getAll() {
-    return _tweets;
+    return _tweets.map(tweet =>{
+      tweet.formattedDate = moment(tweet.created_at).fromNow();
+      return tweet;
+    });
   }
   emitChange() {
     this.emit(CHANGE_EVENT);
@@ -24,16 +28,17 @@ class TweetEventEmitter extends EventEmitter {
 let TweetStore = new TweetEventEmitter();
 
 AppDispatcher.register(action => {
-  switch(action.actionType){
+  switch(action.actionType) {
     case ActionTypes.RECEIVED_TWEETS:
-      console.log(4, 'tweetstore');
-      // acknowledge tweets
       _tweets = action.rawTweets;
-      // emit a change event
+      TweetStore.emitChange();
+      break;
+    case ActionTypes.RECEIVED_ONE_TWEET:
+      _tweets.unshift(action.rawTweet);
       TweetStore.emitChange();
       break;
     default:
-
+      console.log('default');
   }
 });
 
