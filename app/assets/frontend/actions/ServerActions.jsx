@@ -21,5 +21,12 @@ export default {
       actionType: ActionTypes.RECEIVED_USERS,
       rawUsers
     });
+  },
+  receivedOneFollower(rawFollower){
+    console.log('ServerAction', "received follower");
+    AppDispatcher.dispatch({
+      actionType: ActionTypes.RECEIVED_ONE_FOLLOWER,
+      rawFollower
+    });
   }
 };

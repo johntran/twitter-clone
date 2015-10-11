@@ -19,5 +19,10 @@ export default {
     rawUsers=>console.log('rawUsers', rawUsers)
   )
     .error(error => console.log(error));
-  }
+  },
+  followUser(userId){
+    $.post("/followers", {user_id:userId})
+    .success( rawFollower => ServerActions.receivedOneFollower(rawFollower))
+    .error(error => console.log(error));
+  },
 }
