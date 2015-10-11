@@ -4,7 +4,7 @@
 
 See project running here:
 
-> https://github.com/johntran/twitter-clone
+> https://murmuring-refuge-2783.herokuapp.com
 
 ## To Run
 
