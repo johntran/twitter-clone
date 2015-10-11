@@ -76,15 +76,43 @@
 	    _classCallCheck(this, Main);
 	
 	    _get(Object.getPrototypeOf(Main.prototype), "constructor", this).call(this, props);
-	    this.state = { tweetsList: mockTweets };
+	    this.state = { tweetsList: [] };
 	  }
 	
 	  _createClass(Main, [{
+	    key: "formattedTweets",
+	    value: function formattedTweets(tweetsList) {
+	      var formattedList = tweetsList.map(function (tweet) {
+	        tweet.formattedDate = moment(tweet.created_at).fromNow();
+	        return tweet;
+	      });
+	      return {
+	        tweetsList: formattedList
+	      };
+	    }
+	  }, {
 	    key: "addTweet",
 	    value: function addTweet(tweetToAdd) {
-	      var newTweetsList = this.state.tweetsList;
-	      newTweetsList.unshift({ id: Date.now(), name: 'Guest', body: tweetToAdd });
-	      this.setState({ tweetsList: newTweetsList });
+	      var _this = this;
+	
+	      $.post("/tweets", { body: tweetToAdd }).success(function (savedTweet) {
+	        var newTweetsList = _this.state.tweetsList;
+	        newTweetsList.unshift(savedTweet);
+	        _this.setState(_this.formattedTweets(newTweetsList));
+	      }).error(function (error) {
+	        return console.log(error);
+	      });
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
+	      $.ajax("/tweets").success(function (data) {
+	        return _this2.setState(_this2.formattedTweets(data));
+	      }).error(function (error) {
+	        return console.log(error);
+	      });
 	    }
 	  }, {
 	    key: "render",
@@ -146,7 +174,6 @@
 	      event.preventDefault();
 	      this.props.sendTweet(this.refs.tweetTextArea.getDOMNode().value);
 	      this.refs.tweetTextArea.getDOMNode().value = '';
-	      console.log("firing sendTweet");
 	    }
 	  }, {
 	    key: "render",
@@ -290,6 +317,11 @@
 	          "span",
 	          { className: "title" },
 	          this.props.name
+	        ),
+	        React.createElement(
+	          "time",
+	          null,
+	          this.props.formattedDate
 	        ),
 	        React.createElement(
 	          "p",
