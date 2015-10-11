@@ -1,6 +1,6 @@
 #Twitter Clone
 
-A clone of Twitter
+Twitter Clone using Ruby on Rails, React, Flux, ES6, and PostgreSQL.
 
 ## Features
 
@@ -8,6 +8,7 @@ A clone of Twitter
 * Wrote JavaScript 2015 with Babel compiler
 * React Components in ES6
 * Flux Architecture
+* Single Page React Application using React DOM, React Router, and History
 
 ## Live Demo
 
